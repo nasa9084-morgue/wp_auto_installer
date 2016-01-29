@@ -3,6 +3,7 @@
 password="SET YOUR PASSWORD"
 upass=""
 verbose_flg=0
+wwwpath="/var/www/html/"
 
 while getopts u:D:p:v OPT
 do
@@ -33,17 +34,17 @@ then
     exit
 fi
 
-wget "https://ja.wordpress.org/latest-ja.zip"
+wget "https://ja.wordpress.org/latest-ja.zip" -O "${wwwpath}latest-ja.zip"
 if [ $verbose_flg -eq 1 ]
 then
-    unzip -v "latest-ja.zip"
+    unzip -v "${wwwpath}latest-ja.zip"
 else
-    unzip "latest-ja.zip"
+    unzip "${wwwpath}latest-ja.zip"
 fi
 wpdir=${wpdir-"wordpress"}
 if [ ${wpdir} != "wordpress" ]
 then
-    mv ./wordpress ./${wpdir}
+    mv ./wordpress ${wwwpath}${wpdir}
 fi
 
 if [ $verbose_flg -eq 1 ]
@@ -59,7 +60,7 @@ then
     echo "configure...."
 fi
 
-cat <<EOF > ./${wpdir-"wordpress"}/wp-config.php
+cat <<EOF > ${wwwpath}${wpdir-"wordpress"}/wp-config.php
 <?php
 /** WordPress のためのデータベース名 */
 define('DB_NAME', 'wp_${uname}');
@@ -84,7 +85,7 @@ EOF
 
 curl -L "https://api.wordpress.org/secret-key/1.1/salt/" >> wp-config.php
 
-cat <<EOF >> ./${wpdir-"wordpress"}/wp-config.php
+cat <<EOF >> ${wwwpath}${wpdir-"wordpress"}/wp-config.php
 /**#@-*/
 
 /**
