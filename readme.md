@@ -2,6 +2,8 @@
 This is the newest wordpress auto-installer.
 
 ## OPTIONS
+| OPTIONs    | ARGUMENTS                        |
+|:----------:|:--------------------------------:|
 | -u <UNAME> | username (required)              |
 | -p <UPASS> | userpass (required)              |
 | -D <WPDIR> | wordpress install dir (optional) |
