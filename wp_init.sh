@@ -36,7 +36,7 @@ then
     exit
 fi
 
-wget "https://ja.wordpress.org/latest-ja.tar.gz" -O "${wwwpath}latest-ja.zip"
+wget "https://ja.wordpress.org/latest-ja.tar.gz" -O "${wwwpath}latest-ja.tar.gz"
 if [ $verbose_flg -eq 1 ]
 then
     tar zxf -v "${wwwpath}latest-ja.tar.gz" -C "${wwwpath}"
