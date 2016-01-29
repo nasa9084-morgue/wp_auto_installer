@@ -34,12 +34,12 @@ then
     exit
 fi
 
-wget "https://ja.wordpress.org/latest-ja.zip" -O "${wwwpath}latest-ja.zip"
+wget "https://ja.wordpress.org/latest-ja.tar.gz" -O "${wwwpath}latest-ja.zip"
 if [ $verbose_flg -eq 1 ]
 then
-    unzip -v "${wwwpath}latest-ja.zip" -d "${wwwpath}"
+    tar zxf -v "${wwwpath}latest-ja.tar.gz" -C "${wwwpath}"
 else
-    unzip "${wwwpath}latest-ja.zip" -d "${wwwpath}"
+    tar zxf -v "${wwwpath}latest-ja.tar.gz" -C "${wwwpath}"
 fi
 wpdir=${wpdir-"wordpress"}
 if [ ${wpdir} != "wordpress" ]
