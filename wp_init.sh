@@ -11,6 +11,7 @@ do
         D) wpdir=$OPTARG
            ;;
         p) upass=$OPTARG
+           ;;
     esac
 done
 
