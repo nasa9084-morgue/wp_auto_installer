@@ -37,14 +37,14 @@ fi
 wget "https://ja.wordpress.org/latest-ja.zip" -O "${wwwpath}latest-ja.zip"
 if [ $verbose_flg -eq 1 ]
 then
-    unzip -v "${wwwpath}latest-ja.zip"
+    unzip -v "${wwwpath}latest-ja.zip" -d "${wwwpath}"
 else
-    unzip "${wwwpath}latest-ja.zip"
+    unzip "${wwwpath}latest-ja.zip" -d "${wwwpath}"
 fi
 wpdir=${wpdir-"wordpress"}
 if [ ${wpdir} != "wordpress" ]
 then
-    mv ./wordpress ${wwwpath}${wpdir}
+    mv ${wwwpath}wordpress ${wwwpath}${wpdir}
 fi
 
 if [ $verbose_flg -eq 1 ]
