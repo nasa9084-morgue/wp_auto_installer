@@ -2,8 +2,9 @@
 
 password="SET YOUR PASSWORD"
 upass=""
+verbose_flg=0
 
-while getopts u:D:p: OPT
+while getopts u:D:p:v: OPT
 do
     case $OPT in
         u) uname=$OPTARG
@@ -12,22 +13,47 @@ do
            ;;
         p) upass=$OPTARG
            ;;
+        v) verbose_flg=1
+           ;;
     esac
 done
 
 if [ -n "${uname-}" ]
 then
+    if [ verbose_flg -eq 1 ]
+    then
+        echo "User name is not defined."
+    fi
+
     exit
 fi
 
 wget "https://ja.wordpress.org/latest-ja.zip"
-unzip "latest-ja.zip"
+if [ verbose_flg -eq 1 ]
+then
+    unzip -v "latest-ja.zip"
+else
+    unzip "latest-ja.zip"
+fi
 wpdir=${wpdir-"wordpress"}
 if [ ${wpdir} != "wordpress" ]
 then
     mv ./wordpress ./${wpdir}
 fi
+
+if [ verbose_flg -eq 1 ]
+then
+    echo "install directory was set."
+    echo "create database."
+fi
 mysql -u root -p $password -e "create database if not exists wp_${uname};"
+
+if [ verbose_flg -eq 1 ]
+then
+    echo "database is created."
+    echo "configure...."
+fi
+
 cat <<EOF > ./${wpdir-"wordpress"}/wp-config.php
 <?php
 /** WordPress のためのデータベース名 */
@@ -82,3 +108,13 @@ if ( !defined('ABSPATH') )
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
 EOF
+
+if [ verbose_flg -eq 1 ]
+then
+    echo "done."
+fi
+
+if [verbose_flg -eq 1 ]
+then
+    echo "Wordpress installation is done."
+fi
