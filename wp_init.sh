@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/bash -eu
 
 password="SET YOUR PASSWORD"
 upass=""
