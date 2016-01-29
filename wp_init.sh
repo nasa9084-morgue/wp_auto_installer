@@ -5,7 +5,7 @@ upass=""
 verbose_flg=0
 wwwpath="/var/www/html/"
 
-while getopts u:D:p:v OPT
+while getopts u:D:p:vP: OPT
 do
     case $OPT in
         u) uname=$OPTARG
@@ -15,6 +15,8 @@ do
         p) upass=$OPTARG
            ;;
         v) verbose_flg=1
+           ;;
+        P) password=$OPTARG
            ;;
     esac
 done
