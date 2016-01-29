@@ -17,7 +17,7 @@ done
 
 if [ -n "${uname-}" ]
 then
-    return 1
+    exit
 fi
 
 wget "https://ja.wordpress.org/latest-ja.zip"
