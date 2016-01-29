@@ -3,9 +3,9 @@
 password="SET YOUR PASSWORD"
 upass=""
 verbose_flg=0
-wwwpath="/var/www/html/"
+wwwroot="/var/www/html/"
 
-while getopts u:D:p:vP: OPT
+while getopts u:D:p:vP:d: OPT
 do
     case $OPT in
         u) uname=$OPTARG
@@ -17,6 +17,8 @@ do
         v) verbose_flg=1
            ;;
         P) password=$OPTARG
+           ;;
+        d) wwwroot=$OPTARG
            ;;
     esac
 done
@@ -36,17 +38,17 @@ then
     exit
 fi
 
-wget "https://ja.wordpress.org/latest-ja.tar.gz" -O "${wwwpath}latest-ja.tar.gz"
+wget "https://ja.wordpress.org/latest-ja.tar.gz" -O "${wwwroot}latest-ja.tar.gz"
 if [ $verbose_flg -eq 1 ]
 then
-    tar zxvf "${wwwpath}latest-ja.tar.gz" -C "${wwwpath}"
+    tar zxvf "${wwwroot}latest-ja.tar.gz" -C "${wwwroot}"
 else
-    tar zxf  "${wwwpath}latest-ja.tar.gz" -C "${wwwpath}"
+    tar zxf  "${wwwroot}latest-ja.tar.gz" -C "${wwwroot}"
 fi
 wpdir=${wpdir-"wordpress"}
 if [ ${wpdir} != "wordpress" ]
 then
-    mv ${wwwpath}wordpress ${wwwpath}${wpdir}
+    mv ${wwwroot}wordpress ${wwwroot}${wpdir}
 fi
 
 if [ $verbose_flg -eq 1 ]
@@ -63,7 +65,7 @@ then
     echo "configure...."
 fi
 
-cat <<EOF > ${wwwpath}${wpdir-"wordpress"}/wp-config.php
+cat <<EOF > ${wwwroot}${wpdir-"wordpress"}/wp-config.php
 <?php
 /** WordPress のためのデータベース名 */
 define('DB_NAME', 'wp_${uname}');
@@ -88,7 +90,7 @@ EOF
 
 curl -L "https://api.wordpress.org/secret-key/1.1/salt/" >> wp-config.php
 
-cat <<EOF >> ${wwwpath}${wpdir-"wordpress"}/wp-config.php
+cat <<EOF >> ${wwwroot}${wpdir-"wordpress"}/wp-config.php
 /**#@-*/
 
 /**
