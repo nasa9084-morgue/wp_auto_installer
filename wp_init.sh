@@ -51,7 +51,7 @@ then
     echo "install directory was set."
     echo "create database."
 fi
-mysql -u root --password=$password -e "create database if not exists wp_${uname};"
+mysql -u root --password="$password" -e "create database if not exists wp_${uname};"
 
 if [ $verbose_flg -eq 1 ]
 then
