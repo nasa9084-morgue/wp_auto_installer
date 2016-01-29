@@ -55,7 +55,7 @@ then
     echo "create database."
 fi
 mysql -u root --password="$password" -e "create database if not exists wp_${uname};"
-mysql -u root --password="$password" -e "grant all on ${uname}.* to '${uname}'@'localhost' identified by '${upass}';"
+mysql -u root --password="$password" -e "grant all on wp_${uname}.* to '${uname}'@'localhost' identified by '${upass}';"
 
 if [ $verbose_flg -eq 1 ]
 then
