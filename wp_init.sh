@@ -90,7 +90,7 @@ cat <<EOF >> ./${wpdir-"wordpress"}/wp-config.php
 /**
  * WordPress データベーステーブルの接頭辞
  */
-$table_prefix  = 'wp_';
+\$table_prefix  = 'wp_';
 
 /**
  * 開発者へ: WordPress デバッグモード
