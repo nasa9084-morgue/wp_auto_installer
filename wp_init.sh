@@ -23,7 +23,7 @@ then
     echo "username=${uname-}"
 fi
 uname=${uname-""}
-if [ -n "$uname" ]
+if [ -z "$uname" ]
 then
     if [ $verbose_flg -eq 1 ]
     then
